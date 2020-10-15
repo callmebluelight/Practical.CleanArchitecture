@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: webapi
+  name: webapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapi
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: webapi
+    spec:
+      containers:
+      - env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Development
+        - name: ConnectionStrings__ClassifiedAds
+          value: Server=db;Database=ClassifiedAds;User Id=sa;Password=sqladmin123!@#;MultipleActiveResultSets=true
+        - name: IdentityServerAuthentication__Authority
+          value: http://20.195.18.131
+        - name: IdentityServerAuthentication__RequireHttpsMetadata
+          value: "false"
+        - name: MessageBroker__AzureQueue__ConnectionString
+          value: DefaultEndpointsProtocol=https;AccountName=xxx;AccountKey=xxx;EndpointSuffix=core.windows.net
+        - name: MessageBroker__Kafka__BootstrapServers
+          value: kafka:9092
+        - name: MessageBroker__Provider
+          value: RabbitMQ
+        - name: MessageBroker__RabbitMQ__HostName
+          value: rabbitmq
+        - name: Storage__Amazon__AccessKeyID
+          value: xxx
+        - name: Storage__Amazon__BucketName
+          value: classifiedadds
+        - name: Storage__Amazon__RegionEndpoint
+          value: ap-southeast-1
+        - name: Storage__Amazon__SecretAccessKey
+          value: xxx
+        - name: Storage__Azure__ConnectionString
+          value: DefaultEndpointsProtocol=https;AccountName=xxx;AccountKey=xxx;EndpointSuffix=core.windows.net
+        - name: Storage__Azure__Container
+          value: classifiedadds
+        - name: Storage__Provider
+          value: Fake
+        image: phongnguyend/classifiedads.webapi
+        name: webapi
+        ports:
+        - containerPort: 80
+        resources: {}
+      restartPolicy: Always
+status: {}

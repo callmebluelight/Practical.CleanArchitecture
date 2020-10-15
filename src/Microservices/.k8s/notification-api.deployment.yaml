@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: notification-api
+  name: notification-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notification-api
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: notification-api
+    spec:
+      containers:
+      - env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Development
+        - name: ConnectionStrings__ClassifiedAds
+          value: Server=db;Database=ClassifiedAds.Microservices;User Id=sa;Password=sqladmin123!@#;MultipleActiveResultSets=true
+        - name: IdentityServerAuthentication__Authority
+          value: http://20.43.159.181
+        - name: IdentityServerAuthentication__RequireHttpsMetadata
+          value: "false"
+        - name: MessageBroker__Provider
+          value: RabbitMQ
+        - name: MessageBroker__RabbitMQ__HostName
+          value: rabbitmq
+        - name: Services__AuditLog__Grpc
+          value: https://auditlog-grpc
+        - name: Services__Identity__Grpc
+          value: https://identity-grpc
+        - name: Services__Notification__Grpc
+          value: https://notification-grpc
+        image: phongnguyend/classifiedads.services.notification.api
+        name: notification-api
+        resources: {}
+      restartPolicy: Always
+status: {}

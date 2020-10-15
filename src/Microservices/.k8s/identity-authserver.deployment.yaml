@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: identity-authserver
+  name: identity-authserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: identity-authserver
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: identity-authserver
+    spec:
+      containers:
+      - env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Development
+        - name: ConnectionStrings__ClassifiedAds
+          value: Server=db;Database=ClassifiedAds.Microservices;User Id=sa;Password=sqladmin123!@#;MultipleActiveResultSets=true
+        - name: CookiePolicyOptions__IsEnabled
+          value: "true"
+        - name: CookiePolicyOptions__MinimumSameSitePolicy
+          value: Lax
+        - name: CookiePolicyOptions__Secure
+          value: None
+        - name: MessageBroker__Provider
+          value: RabbitMQ
+        - name: MessageBroker__RabbitMQ__HostName
+          value: rabbitmq
+        - name: Services__AuditLog__Grpc
+          value: https://auditlog-grpc
+        - name: Services__Identity__Grpc
+          value: https://identity-grpc
+        - name: Services__Notification__Grpc
+          value: https://notification-grpc
+        image: phongnguyend/classifiedads.services.identity.authserver
+        name: identity-authserver
+        ports:
+        - containerPort: 80
+        resources: {}
+      restartPolicy: Always
+status: {}

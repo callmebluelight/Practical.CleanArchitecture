@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ocelot
+  name: ocelot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ocelot
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: ocelot
+    spec:
+      containers:
+      - env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Docker
+        - name: ConnectionStrings__ClassifiedAds
+          value: Server=db;Database=ClassifiedAds.Microservices;User Id=sa;Password=sqladmin123!@#;MultipleActiveResultSets=true
+        image: phongnguyend/classifiedads.gateways.ocelot
+        name: ocelot
+        ports:
+        - containerPort: 80
+        resources: {}
+      restartPolicy: Always
+status: {}

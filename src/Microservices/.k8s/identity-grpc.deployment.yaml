@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: identity-grpc
+  name: identity-grpc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: identity-grpc
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: identity-grpc
+    spec:
+      containers:
+      - env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Development
+        - name: ASPNETCORE_URLS
+          value: https://+
+        - name: ConnectionStrings__ClassifiedAds
+          value: Server=db;Database=ClassifiedAds.Microservices;User Id=sa;Password=sqladmin123!@#;MultipleActiveResultSets=true
+        - name: Services__AuditLog__Grpc
+          value: https://auditlog-grpc
+        - name: Services__Identity__Grpc
+          value: https://identity-grpc
+        - name: Services__Notification__Grpc
+          value: https://notification-grpc
+        image: phongnguyend/classifiedads.services.identity.grpc
+        name: identity-grpc
+        resources: {}
+      restartPolicy: Always
+status: {}

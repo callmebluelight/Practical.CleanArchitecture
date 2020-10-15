@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: migrator
+  name: migrator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: migrator
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: migrator
+    spec:
+      containers:
+      - env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Development
+        - name: CheckDependency__Enabled
+          value: "true"
+        - name: CheckDependency__Host
+          value: db:1433
+        - name: ConnectionStrings__ClassifiedAds
+          value: Server=db;Database=ClassifiedAds.ModularMonolith;User Id=sa;Password=sqladmin123!@#;MultipleActiveResultSets=true
+        image: phongnguyend/classifiedads.modularmonolith.migrator
+        name: migrator
+        resources: {}
+      restartPolicy: Always
+status: {}

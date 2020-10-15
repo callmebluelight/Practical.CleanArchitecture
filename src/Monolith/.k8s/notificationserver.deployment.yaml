@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: notificationserver
+  name: notificationserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notificationserver
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: notificationserver
+    spec:
+      containers:
+      - env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Development
+        - name: ConnectionStrings__ClassifiedAds
+          value: Server=db;Database=ClassifiedAds;User Id=sa;Password=sqladmin123!@#;MultipleActiveResultSets=true
+        image: phongnguyend/classifiedads.notificationserver
+        name: notificationserver
+        ports:
+        - containerPort: 80
+        resources: {}
+      restartPolicy: Always
+status: {}
