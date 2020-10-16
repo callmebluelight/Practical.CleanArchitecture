@@ -21,10 +21,6 @@ spec:
           value: Development
         - name: ConnectionStrings__ClassifiedAds
           value: Server=db;Database=ClassifiedAds.Microservices;User Id=sa;Password=sqladmin123!@#;MultipleActiveResultSets=true
-        - name: IdentityServerAuthentication__Authority
-          value: http://20.43.159.181
-        - name: IdentityServerAuthentication__RequireHttpsMetadata
-          value: "false"
         - name: MessageBroker__Provider
           value: RabbitMQ
         - name: MessageBroker__RabbitMQ__HostName
@@ -40,12 +36,9 @@ spec:
         - name: Notification__Sms__Twilio__AccountSId
         - name: Notification__Sms__Twilio__AuthToken
         - name: Notification__Sms__Twilio__FromNumber
-        - name: Services__AuditLog__Grpc
-          value: https://auditlog-grpc
-        - name: Services__Identity__Grpc
-          value: https://identity-grpc
-        - name: Services__Notification__Grpc
-          value: https://notification-grpc
+        envFrom:
+        - configMapRef:
+            name: shared
         image: phongnguyend/classifiedads.services.notification.background
         name: notification-background
         resources: {}

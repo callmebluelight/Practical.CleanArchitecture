@@ -19,18 +19,15 @@ spec:
       - env:
         - name: ASPNETCORE_ENVIRONMENT
           value: Development
-        - name: ConnectionStrings__ClassifiedAds
-          value: Server=db;Database=ClassifiedAds.ModularMonolith;User Id=sa;Password=sqladmin123!@#;MultipleActiveResultSets=true
         - name: CookiePolicyOptions__IsEnabled
           value: "true"
         - name: CookiePolicyOptions__MinimumSameSitePolicy
           value: Lax
         - name: CookiePolicyOptions__Secure
           value: None
-        - name: MessageBroker__Provider
-          value: RabbitMQ
-        - name: MessageBroker__RabbitMQ__HostName
-          value: rabbitmq
+        envFrom:
+        - configMapRef:
+            name: shared
         image: phongnguyend/classifiedads.modularmonolith.identityserver
         name: identityserver
         ports:

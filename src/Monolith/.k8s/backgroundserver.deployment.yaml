@@ -23,29 +23,11 @@ spec:
           value: "true"
         - name: CheckDependency__Host
           value: migrator:80,rabbitmq:5672
-        - name: ConnectionStrings__ClassifiedAds
-          value: Server=db;Database=ClassifiedAds;User Id=sa;Password=sqladmin123!@#;MultipleActiveResultSets=true
-        - name: MessageBroker__AzureQueue__ConnectionString
-          value: DefaultEndpointsProtocol=https;AccountName=xxx;AccountKey=xxx;EndpointSuffix=core.windows.net
-        - name: MessageBroker__Kafka__BootstrapServers
-          value: kafka:9092
-        - name: MessageBroker__Provider
-          value: RabbitMQ
-        - name: MessageBroker__RabbitMQ__HostName
-          value: rabbitmq
         - name: NotificationServer__Endpoint
           value: http://notificationserver
-        - name: Notification__Email__Provider
-          value: SmtpClient
-        - name: Notification__Email__SmtpClient__Host
-          value: mailhog
-        - name: Notification__Email__SmtpClient__Port
-          value: "1025"
-        - name: Notification__Sms__Provider
-          value: Fake
-        - name: Notification__Sms__Twilio__AccountSId
-        - name: Notification__Sms__Twilio__AuthToken
-        - name: Notification__Sms__Twilio__FromNumber
+        envFrom:
+        - configMapRef:
+            name: shared
         image: phongnguyend/classifiedads.backgroundserver
         name: backgroundserver
         ports:

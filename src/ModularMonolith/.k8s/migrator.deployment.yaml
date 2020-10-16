@@ -23,8 +23,9 @@ spec:
           value: "true"
         - name: CheckDependency__Host
           value: db:1433
-        - name: ConnectionStrings__ClassifiedAds
-          value: Server=db;Database=ClassifiedAds.ModularMonolith;User Id=sa;Password=sqladmin123!@#;MultipleActiveResultSets=true
+        envFrom:
+        - configMapRef:
+            name: shared
         image: phongnguyend/classifiedads.modularmonolith.migrator
         name: migrator
         resources: {}

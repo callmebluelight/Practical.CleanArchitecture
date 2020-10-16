@@ -26,7 +26,7 @@ spec:
         - name: CookiePolicyOptions__Secure
           value: None
         - name: OpenIdConnect__Authority
-          value: http://host.docker.internal:9000
+          value: http://identityserver
         - name: OpenIdConnect__RequireHttpsMetadata
           value: "false"
         - name: ResourceServer__Endpoint

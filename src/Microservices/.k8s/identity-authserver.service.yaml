@@ -21,6 +21,24 @@ kind: Service
 metadata:
   labels:
     app: identity-authserver
+  name: identityserver
+spec:
+  ports:
+  - name: "80"
+    port: 80
+    targetPort: 80
+  selector:
+    app: identity-authserver
+status:
+  loadBalancer: {}
+  
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: identity-authserver
   name: identity-authserver-public
 spec:
   type: LoadBalancer
