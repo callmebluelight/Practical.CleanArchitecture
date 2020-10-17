@@ -19,26 +19,11 @@ spec:
       - env:
         - name: ASPNETCORE_ENVIRONMENT
           value: Development
-        - name: ConnectionStrings__ClassifiedAds
-          value: Server=db;Database=ClassifiedAds.Microservices;User Id=sa;Password=sqladmin123!@#;MultipleActiveResultSets=true
-        - name: MessageBroker__Provider
-          value: RabbitMQ
-        - name: MessageBroker__RabbitMQ__HostName
-          value: rabbitmq
-        - name: Notification__Email__Provider
-          value: SmtpClient
-        - name: Notification__Email__SmtpClient__Host
-          value: mailhog
-        - name: Notification__Email__SmtpClient__Port
-          value: "1025"
-        - name: Notification__Sms__Provider
-          value: Fake
-        - name: Notification__Sms__Twilio__AccountSId
-        - name: Notification__Sms__Twilio__AuthToken
-        - name: Notification__Sms__Twilio__FromNumber
         envFrom:
         - configMapRef:
             name: shared
+        - configMapRef:
+            name: notification
         image: phongnguyend/classifiedads.services.notification.background
         name: notification-background
         resources: {}

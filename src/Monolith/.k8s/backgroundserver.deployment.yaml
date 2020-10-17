@@ -17,8 +17,6 @@ spec:
     spec:
       containers:
       - env:
-        - name: ASPNETCORE_ENVIRONMENT
-          value: Development
         - name: CheckDependency__Enabled
           value: "true"
         - name: CheckDependency__Host

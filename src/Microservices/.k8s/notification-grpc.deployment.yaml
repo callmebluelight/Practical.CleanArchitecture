@@ -21,15 +21,11 @@ spec:
           value: Development
         - name: ASPNETCORE_URLS
           value: https://+
-        - name: ConnectionStrings__ClassifiedAds
-          value: Server=db;Database=ClassifiedAds.Microservices;User Id=sa;Password=sqladmin123!@#;MultipleActiveResultSets=true
-        - name: MessageBroker__Provider
-          value: RabbitMQ
-        - name: MessageBroker__RabbitMQ__HostName
-          value: rabbitmq
         envFrom:
         - configMapRef:
             name: shared
+        - configMapRef:
+            name: notification
         image: phongnguyend/classifiedads.services.notification.grpc
         name: notification-grpc
         resources: {}

@@ -28,6 +28,8 @@
   ```
   kubectl apply -f .k8s
   kubectl get all
+  kubectl get services
+  kubectl get pods
   ```
 
 - Delete

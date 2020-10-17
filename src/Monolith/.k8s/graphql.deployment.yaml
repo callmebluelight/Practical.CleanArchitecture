@@ -17,8 +17,6 @@ spec:
     spec:
       containers:
       - env:
-        - name: ASPNETCORE_ENVIRONMENT
-          value: Development
         - name: ResourceServer__Endpoint
           value: http://webapi
         - name: ResourceServer__PublicEndpoint

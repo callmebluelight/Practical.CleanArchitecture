@@ -17,8 +17,6 @@ spec:
     spec:
       containers:
       - env:
-        - name: ASPNETCORE_ENVIRONMENT
-          value: Development
         - name: BackgroundServer__Endpoint
           value: http://backgroundserver
         - name: CheckDependency__Enabled

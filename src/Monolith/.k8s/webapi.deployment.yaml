@@ -17,8 +17,6 @@ spec:
     spec:
       containers:
       - env:
-        - name: ASPNETCORE_ENVIRONMENT
-          value: Development
         - name: IdentityServerAuthentication__Authority
           value: http://identityserver
         - name: IdentityServerAuthentication__RequireHttpsMetadata
