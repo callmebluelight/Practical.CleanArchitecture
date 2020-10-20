@@ -2,25 +2,28 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: ocelot
-  name: ocelot
+    app: webapi
+  name: webapi
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ocelot
+      app: webapi
   strategy: {}
   template:
     metadata:
       labels:
-        app: ocelot
+        app: webapi
     spec:
       containers:
       - env:
         - name: ASPNETCORE_ENVIRONMENT
-          value: Docker
-        image: phongnguyend/classifiedads.gateways.ocelot
-        name: ocelot
+          value: Development
+        envFrom:
+        - configMapRef:
+            name: webapi
+        image: phongnguyend/classifiedads.gateways.webapi
+        name: webapi
         ports:
         - containerPort: 80
         resources: {}

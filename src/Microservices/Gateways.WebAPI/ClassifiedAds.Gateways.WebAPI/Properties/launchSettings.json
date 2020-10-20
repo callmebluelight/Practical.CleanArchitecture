@@ -14,7 +14,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "ClassifiedAds.Gateways.Ocelot": {
+    "ClassifiedAds.Gateways.WebAPI": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
